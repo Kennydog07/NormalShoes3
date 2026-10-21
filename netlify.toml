@@ -37,3 +37,7 @@
   from = "/archive-brimful-bellies"
   to = "/releases"
   status = 301
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

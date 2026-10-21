@@ -40,12 +40,12 @@
 </header>
 <main id="main" tabindex="-1">
 
-<section class="page-hero section-border"><div class="wrap"><p class="eyebrow">The Studio</p><h1>Make your own collector discs</h1><p class="lede">We master your film, design and print the artwork and packaging, and give you everything you need. Everything is made by Normal Shoes, except that you press burn.</p><div class="cta-row"><a class="btn btn-primary" href="#book">Book the Disc Lab</a><a class="btn btn-secondary" href="/how-we-work">How we stay legal</a></div></div></section>
+<section class="page-hero section-border"><div class="wrap"><p class="eyebrow">The Studio</p><h1>Make your own collector discs</h1><p class="lede">We master your film, design and print the artwork and packaging, and give you everything you need. Everything is made by Normal Shoes, except that you, or someone you nominate who isn't connected to Normal Shoes and isn't paid to burn, press burn.</p><div class="cta-row"><a class="btn btn-primary" href="#book">Book the Disc Lab</a><a class="btn btn-secondary" href="/how-we-work">How we stay legal</a></div></div></section>
 <section class="section-border"><div class="wrap"><h2>How it works</h2><ol class="steps">
 <li>Send your film by share link.</li>
 <li>We master it: menus, chapters, colour and sound polish (optional).</li>
 <li>We design and print your artwork and blank discs.</li>
-<li>You come to a Disc Lab and make and pack your own discs.</li>
+<li>You come to a Disc Lab and make and pack your own discs (you, or someone you nominate who isn't connected to Normal Shoes and isn't paid to burn, make the copies).</li>
 <li>You leave with your collector set.</li></ol></div></section>
 <section class="section-border"><div class="wrap"><h2>Mastering packages</h2><div class="grid">
 <article class="card"><h3>Essential</h3><p class="price"><span data-placeholder>£XX</span></p><p>Disc file mastered from your export, with a simple menu. <span data-placeholder>Details TBC</span></p></article>
@@ -60,7 +60,7 @@
 <section class="section-border"><div class="wrap"><h2 id="book">Ways to make your discs</h2><div class="grid">
 <article class="card card-accent"><h3>Studio Disc Lab</h3><p>Hands-on sessions with our equipment and our help: group sessions, one-to-one sessions, or film school sessions.</p><p><a href="/contact?topic=disc-lab">Ask to book a session</a></p></article>
 <article class="card"><h3>At-home kit</h3><p>A digital disc file sent by private, expiring link, blank printed discs, packaging and a step-by-step guide. UK shipping: <span data-placeholder>£XX</span>.</p><p><a href="/contact?topic=kit">Ask about a kit</a></p></article>
-<article class="card"><h3>Disc Lab Station at screenings</h3><p>For selected festival filmmakers only, booked in advance. Not open to audiences.</p><p><a href="/programme">See the programme</a></p></article>
+<article class="card"><h3>Disc Lab Station at screenings</h3><p>For selected festival filmmakers only, booked in advance. The filmmaker, or someone they nominate who isn't connected to Normal Shoes and isn't paid to burn, makes the copies. Not open to audiences.</p><p><a href="/programme">See the programme</a></p></article>
 </div>
 <h3 style="margin-top:2.5rem">Prices</h3>
 <div class="table-wrap"><table class="prose" style="max-width:640px"><caption class="visually-hidden">Studio prices</caption><thead><tr><th scope="col">Item</th><th scope="col">Price</th></tr></thead><tbody>
@@ -71,8 +71,32 @@
 <tr><td>Blank printed discs (per pack of <span data-placeholder>XX</span>)</td><td><span data-placeholder>£XX</span></td></tr>
 </tbody></table></div>
 <p>Each session is capped at <span data-placeholder>10</span> discs, for personal use. <!-- TODO: confirm the 10-disc cap per session --> Want more copies, or to sell your discs? See <a href="/releases">Rated releases</a>.</p>
-<div class="cta-row"><a class="btn btn-primary" href="/contact?topic=disc-lab">Book the Disc Lab</a></div></div></section>
-<section class="section-border"><div class="wrap"><div class="callout"><h2>How the Disc Lab works</h2><p>You make the copies of your own film yourself, using our equipment and with our help, or at home with your kit. We charge for mastering, workshops, equipment use and blank printed discs, never for finished copies of a film. Bring only a film you own the rights to, including the music. Copies you make for yourself, or give away free of charge, don't need a BBFC rating. To sell copies, choose a Rated release.</p></div>
+<div class="cta-row"><a class="btn btn-primary" href="#pay">Book the Disc Lab</a><a class="btn btn-secondary" href="/contact?topic=disc-lab">Ask a question</a></div></div></section>
+<section class="section-border" id="pay"><div class="wrap">
+<h2>Book and pay online</h2>
+<p class="muted">Prices are for sessions, mastering, design, print and blank media, never for finished copies of a film. Payments are handled securely by Stripe.</p>
+<fieldset id="disc-lab-confirm" class="full" style="max-width:760px"><legend>Disc Lab confirmation (required before booking)</legend>
+<label class="check" for="dl-rights"><input type="checkbox" id="dl-rights" name="dl-rights"> I own the rights to the film, including the music, or have permission. The copies will be made by me, or by someone I nominate who isn't connected to Normal Shoes and isn't paid to burn, and they're for personal use or to give away free of charge.</label>
+<div class="field" style="margin-top:1rem"><label for="dl-nominee">Nominee's name, if someone else will make the copies (optional)</label><input id="dl-nominee" name="dl-nominee" type="text" maxlength="100" autocomplete="off"></div>
+<label class="check" for="dl-nominee-confirm"><input type="checkbox" id="dl-nominee-confirm" name="dl-nominee-confirm"> My nominee isn't connected to Normal Shoes, and isn't paid by Normal Shoes or anyone else to burn the discs.</label>
+</fieldset>
+<div class="table-wrap" style="margin-top:1.5rem"><table class="prose" style="max-width:760px"><caption class="visually-hidden">Book and pay online</caption><thead><tr><th scope="col">Item</th><th scope="col">Book</th></tr></thead><tbody>
+<tr><td>Group Disc Lab session (per person)</td><td><button type="button" class="btn btn-sea btn-small" data-buy="disc-lab-group" data-label="Book" disabled>Booking opens soon</button></td></tr>
+<tr><td>One-to-one Disc Lab session</td><td><button type="button" class="btn btn-sea btn-small" data-buy="disc-lab-one-to-one" data-label="Book" disabled>Booking opens soon</button></td></tr>
+<tr><td>Film school session</td><td><button type="button" class="btn btn-sea btn-small" data-buy="disc-lab-film-school" data-label="Book" disabled>Booking opens soon</button></td></tr>
+<tr><td>Mastering: Essential</td><td><button type="button" class="btn btn-sea btn-small" data-buy="mastering-essential" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>Mastering: Enhanced</td><td><button type="button" class="btn btn-sea btn-small" data-buy="mastering-enhanced" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>Mastering: Full finish</td><td><button type="button" class="btn btn-sea btn-small" data-buy="mastering-full-finish" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>Packaging: Essential DVD</td><td><button type="button" class="btn btn-sea btn-small" data-buy="packaging-essential-dvd" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>Packaging: Collector DVD</td><td><button type="button" class="btn btn-sea btn-small" data-buy="packaging-collector-dvd" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>Packaging: Collector Blu-ray</td><td><button type="button" class="btn btn-sea btn-small" data-buy="packaging-collector-bluray" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td><label for="qty-blank-disc-pack">Blank printed disc packs</label> <select id="qty-blank-disc-pack" data-qty-for="blank-disc-pack"><option>1</option><option>2</option></select><br><span class="muted">Maximum <span data-placeholder>10</span> discs per session.</span></td><td><button type="button" class="btn btn-sea btn-small" data-buy="blank-disc-pack" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+<tr><td>At-home kit (UK delivery added at checkout)</td><td><button type="button" class="btn btn-sea btn-small" data-buy="at-home-kit" data-label="Buy" disabled>Booking opens soon</button></td></tr>
+</tbody></table></div>
+<p id="checkout-msg" class="form-error" role="alert" tabindex="-1"></p>
+<noscript><p class="notice">Online booking needs JavaScript. Email normalshoeseditions@gmail.com to book.</p></noscript>
+</div></section>
+<section class="section-border"><div class="wrap"><div class="callout"><h2>How the Disc Lab works</h2><p>You make the copies of your own film yourself, using our equipment and with our help, or at home with your kit. We charge for mastering, workshops, equipment use and blank printed discs, never for finished copies of a film. Bring only a film you own the rights to, including the music. Copies you make for yourself, or give away free of charge, don't need a BBFC rating. To sell copies, choose a Rated release. You can also nominate someone to make the copies for you, as long as they aren't connected to Normal Shoes and aren't paid to do it.</p></div>
 <h2>No burner at home?</h2><p class="prose">That's fine. You can book a Studio Disc Lab and use our equipment, borrow or rent a disc burner from a friend or a local shop, or use the facilities at your university or college if you're a student.</p></div></section>
 
 </main>

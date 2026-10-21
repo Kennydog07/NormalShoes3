@@ -81,7 +81,7 @@ function eventCard(ev) {
   if (ev.soldOut) ticket = `<span class="badge">Sold out</span>`;
   else if (isRealUrl(ev.ticketUrl)) ticket = `<a class="btn btn-primary btn-small" href="${esc(ev.ticketUrl)}">${ev.strand === "Disc Lab" ? "Book this session" : "Tickets"}${ev.ticketPrice ? " · " + esc(ev.ticketPrice) : ""}</a>`;
   else ticket = `<span class="event-meta">${ev.strand === "Disc Lab" ? "Booking" : "Tickets"}: ${ev.ticketPrice ? ph(ev.ticketPrice) + " · " : ""}link to follow</span>`;
-  const station = ev.discLabStation ? `<div class="station" role="note"><strong>Disc Lab Station: for selected filmmakers (booking required)</strong>Not open to audiences. Selected filmmakers make discs of their own film here. ${isRealUrl(ev.stationBookingUrl) ? `<a href="${esc(ev.stationBookingUrl)}">Filmmaker station booking</a>` : "Filmmaker booking link to follow."}</div>` : "";
+  const station = ev.discLabStation ? `<div class="station" role="note"><strong>Disc Lab Station: for selected filmmakers (booking required)</strong>Not open to audiences. Selected filmmakers, or someone they nominate who isn't connected to Normal Shoes and isn't paid to burn, make discs of their own film here. ${isRealUrl(ev.stationBookingUrl) ? `<a href="${esc(ev.stationBookingUrl)}">Filmmaker station booking</a>` : "Filmmaker booking link to follow."}</div>` : "";
   return `<li class="event" data-id="${esc(ev.id)}">
     <h3>${esc(ev.title)}</h3>
     <p class="event-meta">${esc(fmtDate(ev.date, true))}${time ? " · " + esc(time) : ""} · ${esc(venue)}${ev.venueAddress ? ", " + esc(ev.venueAddress) : ""}</p>
@@ -156,11 +156,12 @@ async function initCompilation() {
   let c;
   try { c = await loadJSON("/data/compilation.json"); } catch (e) { el.innerHTML = `<p class="notice">Compilation details couldn't be loaded. Please try again later.</p>`; return; }
   let status;
-  if (c.status === "on sale") status = `<p><strong>On sale.</strong> ${c.ratingText ? "Classification: " + esc(c.ratingText) + "." : ""}</p>${c.price ? `<p class="price">${esc(c.price)}</p>` : ""}${isRealUrl(c.buyUrl) ? `<p><a class="btn btn-sea" id="compilation-buy" href="${esc(c.buyUrl)}">Buy the compilation</a></p>` : ""}`;
+  if (c.status === "on sale") status = `<p><strong>On sale.</strong> ${c.ratingText ? "Classification: " + esc(c.ratingText) + "." : ""}</p>${c.price ? `<p class="price">${esc(c.price)}</p>` : ""}<p><button type="button" class="btn btn-sea" id="compilation-buy" data-buy="compilation" data-label="Buy the compilation" disabled>Booking opens soon</button></p>`;
   else if (c.status === "rating pending") status = `<p><strong>Awaiting BBFC classification. On sale once rated.</strong></p>`;
   else status = `<p><strong>Coming soon.</strong></p>`;
   const films = (c.films || []).map((f) => `<li>${esc(f.title)}${f.director ? " — " + esc(f.director) : ""}${f.country ? " (" + esc(f.country) + ")" : ""}</li>`).join("");
   el.innerHTML = `<article class="card card-accent" data-status="${esc(c.status)}"><h3>${esc(c.title)}${c.year ? " (" + esc(c.year) + ")" : ""}</h3>${status}${films ? `<h4>Films</h4><ul>${films}</ul>` : ""}</article>`;
+  initCheckout(c.status);
 }
 
 /* ---------- Forms (Netlify Forms with honest success / error) ---------- */
@@ -240,3 +241,46 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = String(new Date().getFullYear()); });
   initPartners(); initComingUp(); initProgramme(); initCompilation();
 });
+
+/* ---------- Stripe Checkout (prices are set server-side in data/products.json) ---------- */
+let productsCache = null;
+async function initCheckout(compilationStatus) {
+  const buttons = [...document.querySelectorAll("[data-buy]:not([data-ready])")];
+  if (!buttons.length) return;
+  try { productsCache = productsCache || await loadJSON("/data/products.json"); } catch (e) { productsCache = { products: [] }; }
+  const msg = document.getElementById("checkout-msg");
+  const say = (html) => { if (!msg) return; msg.innerHTML = html; msg.classList.add("is-visible"); msg.focus(); };
+  const gbp = (p) => "£" + (p / 100).toFixed(2);
+  buttons.forEach((btn) => {
+    btn.setAttribute("data-ready", "");
+    const pr = (productsCache.products || []).find((x) => x.id === btn.dataset.buy);
+    const live = pr && pr.active === true && pr.pricePence > 0 && (pr.route !== "B" || compilationStatus === "on sale");
+    if (!live) { btn.disabled = true; btn.textContent = "Booking opens soon"; return; }
+    btn.disabled = false;
+    btn.textContent = `${btn.dataset.label || "Book"} · ${gbp(pr.pricePence)}`;
+    btn.addEventListener("click", async () => {
+      if (msg) msg.classList.remove("is-visible");
+      const body = { id: pr.id };
+      if (pr.route === "A") {
+        const rights = document.getElementById("dl-rights");
+        if (!rights || !rights.checked) { say("Please tick the Disc Lab confirmation above before booking."); if (rights) rights.focus(); return; }
+        body.confirmRights = true;
+        const nominee = (document.getElementById("dl-nominee") || {}).value || "";
+        const nomOk = (document.getElementById("dl-nominee-confirm") || {}).checked === true;
+        if (nominee.trim() && !nomOk) { say("Please confirm your nominee isn't connected to Normal Shoes and isn't paid to burn the discs."); document.getElementById("dl-nominee-confirm").focus(); return; }
+        if (nominee.trim()) { body.nomineeName = nominee.trim(); body.nomineeConfirm = true; }
+      }
+      const q = document.querySelector(`[data-qty-for="${pr.id}"]`);
+      if (q) body.quantity = Number(q.value);
+      const label = btn.textContent; btn.disabled = true; btn.textContent = "Opening secure payment…";
+      try {
+        const r = await fetch("/.netlify/functions/create-checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const info = await r.json().catch(() => ({}));
+        if (r.ok && info.url) { window.location.href = info.url; return; }
+        say(`${esc(info.error || "Online payment isn't available right now.")} You can book by email at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`);
+      } catch (e) { say(`Online payment isn't available right now. You can book by email at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`); }
+      btn.disabled = false; btn.textContent = label;
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => initCheckout());

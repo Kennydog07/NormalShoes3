@@ -1,0 +1,21 @@
+{
+  "_comment": "Server-side price list for Stripe Checkout. The website only sends an id; the price always comes from here. pricePence is in pence (2500 = £25.00). TODO: set real prices and change active to true once Callum confirms them. Never add finished copies of an unrated film, and never price per finished copy. Route A = Disc Lab (sessions, mastering, packaging, blank media, kits), Route B = BBFC-rated releases (compilation only sells when data/compilation.json status is \"on sale\"), Route C = event keepsakes.",
+  "maxDiscsPerSession": 10,
+  "products": [
+    { "id": "disc-lab-group", "name": "Studio Disc Lab: group session (per person)", "route": "A", "pricePence": 0, "active": false },
+    { "id": "disc-lab-one-to-one", "name": "Studio Disc Lab: one-to-one session", "route": "A", "pricePence": 0, "active": false },
+    { "id": "disc-lab-film-school", "name": "Studio Disc Lab: film school session", "route": "A", "pricePence": 0, "active": false },
+    { "id": "mastering-essential", "name": "Mastering package: Essential", "route": "A", "pricePence": 0, "active": false },
+    { "id": "mastering-enhanced", "name": "Mastering package: Enhanced", "route": "A", "pricePence": 0, "active": false },
+    { "id": "mastering-full-finish", "name": "Mastering package: Full finish", "route": "A", "pricePence": 0, "active": false },
+    { "id": "packaging-essential-dvd", "name": "Packaging: Essential DVD (design, print and blank media)", "route": "A", "pricePence": 0, "active": false },
+    { "id": "packaging-collector-dvd", "name": "Packaging: Collector DVD (design, print and blank media)", "route": "A", "pricePence": 0, "active": false },
+    { "id": "packaging-collector-bluray", "name": "Packaging: Collector Blu-ray (design, print and blank media)", "route": "A", "pricePence": 0, "active": false },
+    { "id": "blank-disc-pack", "name": "Blank printed discs (pack, nothing recorded)", "route": "A", "pricePence": 0, "discsPerPack": 5, "quantityAdjustable": true, "active": false },
+    { "id": "at-home-kit", "name": "At-home Disc Lab kit (disc file link, blank printed discs, packaging, guide)", "route": "A", "pricePence": 0, "shipping": { "pricePence": 0, "label": "UK delivery" }, "active": false },
+    { "id": "keepsake-from-footage", "name": "Event keepsake: from your footage", "route": "C", "pricePence": 0, "active": false },
+    { "id": "keepsake-filming-half-day", "name": "Event keepsake: filming, half day", "route": "C", "pricePence": 0, "active": false },
+    { "id": "keepsake-filming-full-day", "name": "Event keepsake: filming, full day", "route": "C", "pricePence": 0, "active": false },
+    { "id": "compilation", "name": "Normal Shoes: Best of (BBFC-rated compilation)", "route": "B", "pricePence": 0, "active": false }
+  ]
+}
