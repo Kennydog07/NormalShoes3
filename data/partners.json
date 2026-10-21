@@ -1,0 +1,19 @@
+{
+  "_comment": "TODO: set confirmed:true only once each partnership is agreed in writing. Only partners with confirmed:true are shown anywhere on the site. logo is a path in /assets, or empty for a text badge.",
+  "partners": [
+    {
+      "name": "Brighton Rocks International Film Festival",
+      "url": "https://www.rocksfestivals.com/briff",
+      "logo": "/assets/brighton-rocks-logo-192.webp",
+      "confirmed": false,
+      "description": "Partner festival. Description to be agreed with the festival."
+    },
+    {
+      "name": "Hastings Rocks",
+      "url": "",
+      "logo": "",
+      "confirmed": false,
+      "description": "Partner festival. Description to be agreed with the festival."
+    }
+  ]
+}

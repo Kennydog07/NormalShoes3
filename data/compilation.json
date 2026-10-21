@@ -1,0 +1,13 @@
+{
+  "_comment": "status must be one of: \"planned\", \"rating pending\", \"on sale\". The buy button only appears when status is \"on sale\" AND buyUrl is set. Only set \"on sale\" once the BBFC has classified the compilation.",
+  "title": "Normal Shoes: Best of",
+  "year": "2027",
+  "status": "planned",
+  "price": "£XX",
+  "buyUrl": "",
+  "ratingText": "",
+  "films": [
+    { "title": "SAMPLE — Film one", "director": "SAMPLE — Director", "country": "TBC" },
+    { "title": "SAMPLE — Film two", "director": "SAMPLE — Director", "country": "TBC" }
+  ]
+}

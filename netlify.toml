@@ -1,9 +1,6 @@
-# Response headers only — no build settings here, so the existing Netlify
-# site configuration (publish directory, forms, etc.) is unchanged.
-#
-# Asset filenames are not content-hashed, so use a moderate 7-day cache
-# rather than "immutable". If an image is replaced under the same name,
-# visitors may see the old one for up to a week — rename the file instead.
+# Normal Shoes 3 (v4) — static site, published from the repo root.
+[build]
+  publish = "."
 
 [[headers]]
   for = "/assets/*"
@@ -11,6 +8,32 @@
     Cache-Control = "public, max-age=604800"
 
 [[headers]]
-  for = "/clapper-web.mp4"
+  for = "/data/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=300"
+
+# Old v3 URLs folded into the v4 structure
+[[redirects]]
+  from = "/brighton-rocks"
+  to = "/for-festivals"
+  status = 301
+[[redirects]]
+  from = "/hastings-rocks"
+  to = "/for-festivals"
+  status = 301
+[[redirects]]
+  from = "/submission-requirements"
+  to = "/submit"
+  status = 301
+[[redirects]]
+  from = "/package-tiers"
+  to = "/studio"
+  status = 301
+[[redirects]]
+  from = "/archive"
+  to = "/releases"
+  status = 301
+[[redirects]]
+  from = "/archive-brimful-bellies"
+  to = "/releases"
+  status = 301

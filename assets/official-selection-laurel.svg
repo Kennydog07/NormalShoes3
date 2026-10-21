@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200" role="img" aria-labelledby="t">
+  <title id="t">Official Selection · Normal Shoes · Worthing</title>
+  <g fill="none" stroke="#0b5d6b" stroke-width="3" stroke-linecap="round">
+    <path d="M70 170 C 30 140, 25 70, 60 30"/>
+    <path d="M330 170 C 370 140, 375 70, 340 30"/>
+  </g>
+  <g fill="#0b5d6b">
+    <ellipse cx="44" cy="140" rx="12" ry="5" transform="rotate(-60 44 140)"/>
+    <ellipse cx="36" cy="112" rx="12" ry="5" transform="rotate(-75 36 112)"/>
+    <ellipse cx="36" cy="84" rx="12" ry="5" transform="rotate(-95 36 84)"/>
+    <ellipse cx="44" cy="58" rx="12" ry="5" transform="rotate(-115 44 58)"/>
+    <ellipse cx="62" cy="152" rx="12" ry="5" transform="rotate(-20 62 152)"/>
+    <ellipse cx="54" cy="124" rx="12" ry="5" transform="rotate(-30 54 124)"/>
+    <ellipse cx="52" cy="96" rx="12" ry="5" transform="rotate(-40 52 96)"/>
+    <ellipse cx="58" cy="70" rx="12" ry="5" transform="rotate(-55 58 70)"/>
+    <ellipse cx="356" cy="140" rx="12" ry="5" transform="rotate(60 356 140)"/>
+    <ellipse cx="364" cy="112" rx="12" ry="5" transform="rotate(75 364 112)"/>
+    <ellipse cx="364" cy="84" rx="12" ry="5" transform="rotate(95 364 84)"/>
+    <ellipse cx="356" cy="58" rx="12" ry="5" transform="rotate(115 356 58)"/>
+    <ellipse cx="338" cy="152" rx="12" ry="5" transform="rotate(20 338 152)"/>
+    <ellipse cx="346" cy="124" rx="12" ry="5" transform="rotate(30 346 124)"/>
+    <ellipse cx="348" cy="96" rx="12" ry="5" transform="rotate(40 348 96)"/>
+    <ellipse cx="342" cy="70" rx="12" ry="5" transform="rotate(55 342 70)"/>
+  </g>
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" fill="#111111">
+    <text x="200" y="78" font-size="20" letter-spacing="4">OFFICIAL SELECTION</text>
+    <line x1="140" y1="94" x2="260" y2="94" stroke="#0b5d6b" stroke-width="1.5"/>
+    <text x="200" y="126" font-size="30">Normal Shoes</text>
+    <text x="200" y="156" font-size="15" letter-spacing="5">WORTHING</text>
+  </g>
+</svg>
