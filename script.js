@@ -130,7 +130,7 @@ async function initProgramme() {
     const ed = form.elements.edition.value, st = form.elements.strand.value, mo = form.elements.month.value;
     const list = events.filter((e) => (!ed || e.edition === ed) && (!st || e.strand === st) && (!mo || (e.date || "").startsWith(mo)));
     const t = todayISO();
-    const group = (arr) => { const by = {}; arr.forEach((e) => { (by[e.date] = by[e.date] || []).push(e); }); return Object.keys(by).sort().map((d) => `<div class="day-group"><h3>${esc(fmtDate(d, true))}</h3><ul class="event-list">${by[d].map(eventCard).join("")}</ul></div>`).join(""); };
+    const group = (arr) => { const by = {}; arr.forEach((e) => { (by[e.date] = by[e.date] || []).push(e); }); return Object.keys(by).sort().map((d) => `<div class="day-group"><h2 class="day-head">${esc(fmtDate(d, true))}</h2><ul class="event-list">${by[d].map(eventCard).join("")}</ul></div>`).join(""); };
     const up = list.filter((e) => (e.date || "") >= t), past = list.filter((e) => (e.date || "") < t);
     el.innerHTML = (up.length ? group(up) : `<p class="notice">No upcoming sessions match these filters.</p>`) + (past.length ? `<details class="past-sessions"><summary>Past sessions (${past.length})</summary>${group(past.reverse())}</details>` : "");
     status.textContent = `Showing ${up.length} upcoming session${up.length === 1 ? "" : "s"}.`;
